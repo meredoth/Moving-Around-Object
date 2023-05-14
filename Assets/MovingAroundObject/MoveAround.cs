@@ -25,9 +25,9 @@ public class MoveAround : MonoBehaviour
    [SerializeField] private bool clockwise;
 
    private Vector2 _newPosition;
-   private float delay;
+   private float _delay;
    private Transform _thisTransform;
-   private Color color;
+   private Color _color;
    private bool _attackPositionCalculated;
    private MovementType _movementType;
    private readonly Dictionary<MovementType, Action> _perform = new();
@@ -62,7 +62,7 @@ public class MoveAround : MonoBehaviour
       Vector2 AttackPosition()
       {
          _attackPositionCalculated = true;
-         delay = 0f;
+         _delay = 0f;
          return CalculatePosition(center, degrees, clockwise);
       }
       
@@ -90,9 +90,9 @@ public class MoveAround : MonoBehaviour
          if (rd.color == Color.white)
             rd.color = Color.red;
 
-         delay += Time.deltaTime;
+         _delay += Time.deltaTime;
       
-         if (delay >= delayBetweenPoints)
+         if (_delay >= delayBetweenPoints)
          {
             _newPosition = AttackPosition();
             rd.color = Color.white;
